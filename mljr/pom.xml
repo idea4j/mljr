@@ -9,6 +9,12 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+    <parent>
+        <groupId>com.taotao</groupId>
+        <artifactId>taotao-parent</artifactId>
+        <version>2.0-SNAPSHOT</version>
+    </parent>
+
     <dependencies>
         <!-- jsp相关 -->
         <dependency>
@@ -79,9 +85,26 @@
             <groupId>com.github.sgroschupf</groupId>
             <artifactId>zkclient</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.7.4.RELEASE</version>
+        </dependency>
     </dependencies>
 
-    <!-- 添加tomcat插件，此处不用写版本号 -->
     <build>
         <plugins>
             <plugin>
