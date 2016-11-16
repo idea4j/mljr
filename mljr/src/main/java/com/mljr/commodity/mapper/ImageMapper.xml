@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mljr.commodity.mapper.ImageMapper">
+    <resultMap id="BaseResultMap" type="Sku">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="jd_sku_id" property="jdSkuId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="jd_price" property="jdPrice" jdbcType="DECIMAL" />
+        <result column="our_price" property="ourPrice" jdbcType="DECIMAL" />
+        <result column="status" property="status" jdbcType="SMALLINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="label" property="label" jdbcType="TINYINT" />
+        <result column="advertisement_word" property="advertisementWord"
+                jdbcType="VARCHAR" />
+        <result column="forsale_time" property="forsaleTime" jdbcType="TIMESTAMP" />
+        <result column="suspension_time" property="suspensionTime"
+                jdbcType="TIMESTAMP" />
+        <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+        <result column="spu_id" property="spuId" jdbcType="INTEGER" />
+        <result column="sale_attr" property="saleAttr" jdbcType="VARCHAR" />
+        <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+        <result column="intro_backup" property="introBackup" jdbcType="LONGVARCHAR" />
+        <result column="param" property="param" jdbcType="LONGVARCHAR" />
+        <result column="image_path" property="imagePath" jdbcType="LONGVARCHAR" />
+        <result column="image_backup" property="imageBackup" jdbcType="VARCHAR" />
+        <result column="ware_qd" property="wareQd" jdbcType="LONGVARCHAR" />
+        <result column="auto_reprice" property="autoReprice" jdbcType="SMALLINT"/>
+        <result column="price_delta" property="priceDelta" jdbcType="DECIMAL"/>
+        <result column="price_percent" property="pricePercent" jdbcType="DECIMAL"/>
+        <result column="channel" property="channel" jdbcType="SMALLINT"/>
+        <result column="store" property="store" jdbcType="INTEGER"/>
+        <result column="market_price" property="marketPrice" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <!--查询所有的商品数量-->
+    <select id="countAll" resultType="java.lang.Integer">
+        SELECT count(1) FROM s_sku
+    </select>
+
+    <select id="queryCommodityList" resultMap="BaseResultMap" parameterType="CommodityQuery">
+        SELECT
+            id,
+            introduction
+        FROM
+            s_sku
+        WHERE
+            id >= (
+                SELECT
+                    id
+                FROM
+                    s_sku
+                ORDER BY
+                    id
+                LIMIT ${start},1
+            )
+        LIMIT ${pageSize};
+    </select>
+
+</mapper>

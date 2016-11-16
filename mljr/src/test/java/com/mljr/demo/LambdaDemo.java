@@ -19,16 +19,27 @@ public class LambdaDemo {
     public void run1() throws Exception {
         List<Integer> list = new ArrayList();
         list.add(1);
-        list.add(1);
-        list.add(1);
-        list.add(1);
-        list.forEach((haha) -> System.out.println(haha+"1"));
-        list.forEach(System.out::println);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        long start = System.currentTimeMillis();
+        list.stream().parallel().forEach(System.out::println);
+        long end = System.currentTimeMillis();
+        System.out.println("=====================");
+        System.out.println(end - start);
+        start = System.currentTimeMillis();
+        list.stream().forEach(System.out::println);
+        end = System.currentTimeMillis();
+        System.out.println("=====================");
+        System.out.println(end - start);
+
     }
 
+    private Integer haha;
     @Test
     public void run2() throws Exception {
         Logger logger = LoggerFactory.getLogger(LambdaDemo.class);
-        logger.info("日志记录：{} -->> {}", "param1", "param2");
+        logger.info("haha {}", "123");
     }
+
 }

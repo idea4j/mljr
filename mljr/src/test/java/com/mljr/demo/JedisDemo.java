@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,5 +26,7 @@ public class JedisDemo {
         value.set("haha", "haha");
         BoundValueOperations bound = tmp.boundValueOps("haha");
         bound.expire(10000L, TimeUnit.MILLISECONDS);
+        HttpServletResponse response = null;
+
     }
 }
