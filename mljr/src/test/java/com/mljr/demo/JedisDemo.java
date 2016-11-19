@@ -25,5 +25,6 @@ public class JedisDemo {
         value.set("haha", "haha");
         BoundValueOperations bound = tmp.boundValueOps("haha");
         bound.expire(10000L, TimeUnit.MILLISECONDS);
+        System.out.println("hehe");
     }
 }
