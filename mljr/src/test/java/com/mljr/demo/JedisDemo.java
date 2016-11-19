@@ -28,5 +28,6 @@ public class JedisDemo {
         bound.expire(10000L, TimeUnit.MILLISECONDS);
         HttpServletResponse response = null;
 
+        System.out.println("hehe");
     }
 }
