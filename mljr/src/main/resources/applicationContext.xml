@@ -17,37 +17,7 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
 
-    <context:property-placeholder location="classpath:redis.properties"/>
-
-    <aop:aspectj-autoproxy proxy-target-class="true" />
-
-    <bean id="jedisTemplate" class="com.mljr.yourcredit.installment.common.JedisWrapper">
-        <property name="redisServerHost" value="${redis.server.host}"/>
-        <property name="redisServerPort" value="${redis.server.port}"/>
-        <property name="redisServerTimeout" value="${redis.server.timeout}"/>
-    </bean>
-
-    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxIdle" value="${redis.maxIdle}"/>
-        <property name="maxTotal" value="${redis.maxTotal}"/>
-        <property name="minIdle" value="${redis.minIdle}"/>
-        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
-    </bean>
-
-    <bean id="jedisConnFactory"
-          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-          p:host-name="${redis.server.host}" p:port="${redis.server.port}"
-          p:timeout="${redis.server.timeout}"
-          p:pool-config-ref="poolConfig" p:use-pool="true"/>
-
-    <bean id="stringSerializer"
-          class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
-
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
-          p:connection-factory-ref="jedisConnFactory" p:keySerializer-ref="stringSerializer"
-          p:hashKeySerializer-ref="stringSerializer"/>
-
-    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
-          c:redisOperations-ref="redisTemplate"/>
-
+    <context:component-scan base-package="com.mljr.biz">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
 </beans>
