@@ -2,3 +2,4 @@
 .gitignore
 .idea/
 mljr/src/
+/target/
